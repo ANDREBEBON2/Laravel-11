@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // isMember sudah memwakili middleware class CheckMember
             'isMember' =>
             App\Http\Middleware\CheckMember::class,
+            'isAuth' => App\Http\Middleware\isAuth::class,
         ]);
 
         $middleware->validateCsrfTokens(except: ["*"]);

@@ -82,10 +82,15 @@ Route::get('/movie/{id}', function ($id) use ($movies) {
     } else {
         return response()->json('Maaf data yang anda cari tidak tersedia !', 404);
     }
-})->middleware(['isMember']); //2. pastikan isMember sama seperti nama alias di app.php
+})->middleware(['isAuth', 'isMember']); //2. pastikan alias sama seperti nama alias di app.php
 
 
-// membuat route redirect CheckMember
+// membuat route redirect middleware CheckMember
 Route::get('/price', function () {
     return response()->json("Silahkan melakukan pembelian terlebih dahulu !", 200);
+});
+
+// membuat route redirect middleware isAuth
+Route::get("/login", function () {
+    return response()->json("Silahkan Login terlebih dahulu !!", 200);
 });
