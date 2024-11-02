@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckMember; // tambahkan alamat CheckMember
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -71,4 +72,20 @@ Route::delete('/movie/{id}', function ($id) use ($movies) {
     } else {
         return response()->json('Maaf data tidak tersedia');
     }
+});
+
+
+// membuat route khusus member
+Route::get('/movie/{id}', function ($id) use ($movies) {
+    if (!empty($movies[$id])) {
+        return $movies[$id];
+    } else {
+        return response()->json('Maaf data yang anda cari tidak tersedia !', 404);
+    }
+})->middleware(CheckMember::class); // Tambahkan middleware CheckMember
+
+
+// membuat route redirect CheckMember
+Route::get('/price', function () {
+    return response()->json("Silahkan melakukan pembelian terlebih dahulu !", 200);
 });
