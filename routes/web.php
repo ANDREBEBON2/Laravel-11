@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\CheckMember; // tambahkan alamat CheckMember
+//use App\Http\Middleware\CheckMember; // 2. bisa di hapus karna sudah menggunakan nama alias
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -82,7 +82,7 @@ Route::get('/movie/{id}', function ($id) use ($movies) {
     } else {
         return response()->json('Maaf data yang anda cari tidak tersedia !', 404);
     }
-})->middleware(CheckMember::class); // Tambahkan middleware CheckMember
+})->middleware(['isMember']); //2. pastikan isMember sama seperti nama alias di app.php
 
 
 // membuat route redirect CheckMember

@@ -11,6 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // membuat alias agar mempermudah pemanggilan middle ware
+        $middleware->alias([
+            // isMember sudah memwakili middleware class CheckMember
+            'isMember' =>
+            App\Http\Middleware\CheckMember::class,
+        ]);
+
         $middleware->validateCsrfTokens(except: ["*"]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
