@@ -12,7 +12,7 @@ for ($i = 0; $i < 10; $i++) {
     $movies[] = [
         'judul' => 'Movie ' . $i,
         'genre' => 'Comedi',
-        'tahun' => 'tahun',
+        'tahun' => '2017',
     ];
 }
 
@@ -26,7 +26,7 @@ Route::get('/movie', function () use ($movies) {
 });
 
 //POST
-Route::post('/movie', function () {
+Route::post('/movie', function () use ($movies) {
     if (isset($movies)) {
         $movies[] = [
             'judul' => request('judul'),
